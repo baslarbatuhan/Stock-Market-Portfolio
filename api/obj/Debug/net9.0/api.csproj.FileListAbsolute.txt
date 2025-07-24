@@ -164,3 +164,7 @@ C:\Users\batuhan\Desktop\FinShark\api\obj\Debug\net9.0\refint\api.dll
 C:\Users\batuhan\Desktop\FinShark\api\obj\Debug\net9.0\api.pdb
 C:\Users\batuhan\Desktop\FinShark\api\obj\Debug\net9.0\api.genruntimeconfig.cache
 C:\Users\batuhan\Desktop\FinShark\api\obj\Debug\net9.0\ref\api.dll
+C:\Users\batuhan\Desktop\FinShark\api\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\batuhan\Desktop\FinShark\api\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\batuhan\Desktop\FinShark\api\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\batuhan\Desktop\FinShark\api\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll

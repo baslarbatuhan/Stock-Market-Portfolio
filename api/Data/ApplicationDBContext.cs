@@ -19,20 +19,37 @@ namespace api.Data
 
         public DbSet<Stock> Stocks { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public  DbSet<Portfolio> Portfolios { get; set; }
 
+        //TODO: Add other DbSets as needed
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Portfolio>(x => x.HasKey(p => new { p.AppUserId, p.StockId }));
+
+            builder.Entity<Portfolio>()
+                .HasOne(u => u.AppUser)
+                .WithMany(u => u.Portfolios)
+                .HasForeignKey(p => p.AppUserId);
+
+            builder.Entity<Portfolio>()
+                .HasOne(u => u.Stock)
+                .WithMany(u => u.Portfolios)
+                .HasForeignKey(p => p.StockId);
+                
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole
-                {   Id = "2b245ea1-fc39-4035-a199-961caa71f622",
+                {
+                    Id = "a1b2c3d4-e5f6-7890-1234-56789abcdef0",  
                     Name="Admin",
                     NormalizedName ="ADMIN"
+                    
                 },
                 new IdentityRole
-                {   Id = "cc9131fd-9d63-439e-b9dc-ce2120065171",
+                {
+                    Id = "b2c3d4e5-f6a7-8901-2345-6789abcdef01",  
                     Name="User",
                     NormalizedName ="USER"
                 }

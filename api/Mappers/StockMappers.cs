@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Stock;
 using api.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace api.Mappers
 {
@@ -21,11 +20,11 @@ namespace api.Mappers
                 LastDiv = stockModel.LastDiv,
                 Industry = stockModel.Industry,
                 MarketCap = stockModel.MarketCap,
-                Comments = stockModel.Comments.Select(c => c.ToCommentDto()).ToList(),
+                Comments = stockModel.Comments.Select(c => c.ToCommentDto()).ToList()
             };
         }
-    
-    public static Stock ToStockFromCreateDTO(this CreateStockRequestDto stockDto)
+
+        public static Stock ToStockFromCreateDTO(this CreateStockRequestDto stockDto)
         {
             return new Stock
             {
@@ -35,6 +34,19 @@ namespace api.Mappers
                 LastDiv = stockDto.LastDiv,
                 Industry = stockDto.Industry,
                 MarketCap = stockDto.MarketCap
+            };
+        }
+
+        public static Stock ToStockFromFMP(this FMPStock fmpStock)
+        {
+            return new Stock
+            {
+                Symbol = fmpStock.symbol,
+                CompanyName = fmpStock.companyName,
+                Purchase = (decimal)fmpStock.price,
+                LastDiv = (decimal)fmpStock.lastDiv,
+                Industry = fmpStock.industry,
+                MarketCap = fmpStock.mktCap
             };
         }
     }

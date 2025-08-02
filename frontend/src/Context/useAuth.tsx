@@ -44,38 +44,42 @@ export const UserProvider = ({ children }: Props) => {
     await registerAPI(email, username, password)
       .then((res) => {
         if (res) {
-          localStorage.setItem("token", res?.data.token);
+          const token = res.data.token;
           const userObj = {
-            userName: res?.data.userName,
-            email: res?.data.email,
+            userName: res.data.userName,
+            email: res.data.email,
           };
+          localStorage.setItem("token", token);
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token!);
-          setUser(userObj!);
+          setToken(token);
+          setUser(userObj);
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
           toast.success("Login Success!");
           navigate("/search");
         }
       })
-      .catch((e) => toast.warning("Server error occured"));
+      .catch(() => toast.warning("Server error occurred"));
   };
 
   const loginUser = async (username: string, password: string) => {
     await loginAPI(username, password)
       .then((res) => {
         if (res) {
-          localStorage.setItem("token", res?.data.token);
+          const token = res.data.token;
           const userObj = {
-            userName: res?.data.userName,
-            email: res?.data.email,
+            userName: res.data.userName,
+            email: res.data.email,
           };
+          localStorage.setItem("token", token);
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token!);
-          setUser(userObj!);
+          setToken(token);
+          setUser(userObj);
+          axios.defaults.headers.common["Authorization"] = "Bearer " + token;
           toast.success("Login Success!");
           navigate("/search");
         }
       })
-      .catch((e) => toast.warning("Server error occured"));
+      .catch(() => toast.warning("Server error occurred"));
   };
 
   const isLoggedIn = () => {
@@ -86,7 +90,8 @@ export const UserProvider = ({ children }: Props) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser(null);
-    setToken("");
+    setToken(null);
+    delete axios.defaults.headers.common["Authorization"];
     navigate("/");
   };
 
